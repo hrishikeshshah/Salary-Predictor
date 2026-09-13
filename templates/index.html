@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Predictor</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #e8f0ff, #f7f9fc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 520px;
+            background: white;
+            padding: 42px;
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            color: #1f2937;
+            font-size: 30px;
+        }
+
+        .subtitle {
+            margin: 0 0 30px;
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 9px;
+            color: #374151;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 18px;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 10px;
+            background: #ecfdf5;
+            color: #047857;
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 25px;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 28px 22px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="icon">💼</div>
+
+        <h1>Salary Prediction Model</h1>
+
+        <p class="subtitle">
+            Estimate salary based on years of professional experience.
+        </p>
+
+        <form action="/predict/" method="POST">
+            <label for="experience">Years of Experience</label>
+
+            <input
+                type="number"
+                id="experience"
+                name="experience"
+                step="0.1"
+                min="0"
+                placeholder="e.g. 2.5"
+                value="{{ experience if experience is defined else '' }}"
+                required
+            >
+
+            <button type="submit">Predict Salary</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+
+        <div class="footer">
+            Machine Learning • Linear Regression • Flask
+        </div>
+    </div>
+</body>
+</html>
